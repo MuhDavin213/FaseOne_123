@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ucp_paml/halamanDua.dart';
 
 class HalamanSatu extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class _HalamanSatuState extends State<HalamanSatu> {
   String _alamat = '';
   String _noTelp = '';
   String _sex = '';
+  bool _isButtonEnabled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,11 @@ class _HalamanSatuState extends State<HalamanSatu> {
               padding: const EdgeInsets.all(16.0),
               child: Form(
                 key: _formKey,
+                onChanged: () {
+                  setState(() {
+                    _isButtonEnabled = _formKey.currentState!.validate();
+                  });
+                },
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,6 +55,12 @@ class _HalamanSatuState extends State<HalamanSatu> {
                         },
                         onSaved: (value) {
                           _nama = value!;
+                        },
+                        onChanged: (value) {
+                          setState(() {
+                            _isButtonEnabled =
+                                _formKey.currentState!.validate();
+                          });
                         },
                       ),
                       TextFormField(
@@ -108,7 +121,21 @@ class _HalamanSatuState extends State<HalamanSatu> {
                       SizedBox(height: 16),
                       Center(
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: _isButtonEnabled
+                              ? () {
+                                  if (_formKey.currentState!.validate()) {
+                                    _formKey.currentState!.save();
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HalamanDua(
+                                                nama: _nama,
+                                                noTelp: _noTelp,
+                                              )),
+                                    );
+                                  }
+                                }
+                              : null,
                           child: Text('Next'),
                         ),
                       ),
