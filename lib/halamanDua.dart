@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ucp_paml/halamanTiga.dart';
 
 class HalamanDua extends StatefulWidget {
   final String nama;
@@ -73,7 +74,23 @@ class _HalamanDuaState extends State<HalamanDua> {
               SizedBox(height: 16),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HalamanTiga(
+                            nama: widget.nama,
+                            noTelp: widget.noTelp,
+                            makanan: _makanan,
+                            minuman: _minuman,
+                            dessert: _dessert,
+                          ),
+                        ),
+                      );
+                    }
+                  },
                   child: Text('Next'),
                 ),
               ),
