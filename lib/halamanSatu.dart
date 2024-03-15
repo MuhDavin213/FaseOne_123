@@ -128,10 +128,11 @@ class _HalamanSatuState extends State<HalamanSatu> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HalamanDua(
-                                                nama: _nama,
-                                                noTelp: _noTelp,
-                                              )),
+                                        builder: (context) => HalamanDua(
+                                          nama: _nama,
+                                          noTelp: _noTelp,
+                                        ),
+                                      ),
                                     );
                                   }
                                 }
